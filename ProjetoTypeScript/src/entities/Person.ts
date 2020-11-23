@@ -10,11 +10,6 @@ export class Person {
         this.birth = birth
         this.gender = gender
     }
-
-    showYourself () {
-        const article = this.gender === Gender.Male ? 'o' : 'a'
-        return `Olá, eu sou ${article} ${this.name}.`
-      }
 }
 
 export default Person
