@@ -1,4 +1,4 @@
-# BrunoResende01
+# TypeScriptExerc-01
 
-Projeto TypeScript segue os arquivos:
+Projeto TypeScript segue os arquivos do Exercicios!!
 
