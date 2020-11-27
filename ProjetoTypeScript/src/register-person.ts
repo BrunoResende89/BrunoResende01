@@ -1,14 +1,15 @@
-import { createDatePicker } from './DatePicker.js'
 
 const nome = document.querySelector<HTMLInputElement>('#nome')!
-const nascimento = createDatePicker('#nascimento')!
+const nascimento = document.querySelector<HTMLDataListElement>('#nascimento')!
 const sexo = document.querySelector<HTMLSelectElement>('#sexo')!
 const formulario = document.querySelector<HTMLFormElement>('form')!
+const resposta = document.querySelector<HTMLDivElement>('#resposta')!
+
 
 nome.focus()
 
-formulario.addEventListener('submit', (e: Event) => {
-  e.preventDefault()
+formulario.addEventListener('submit', (event: Event) => {
+  event.preventDefault()
 
   nome.className = nascimento.className = sexo.className = ''
 
