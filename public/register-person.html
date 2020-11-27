@@ -11,24 +11,34 @@
   <header>
     <h1>Documentos Exigidos</h1>
     <p>
-      Preencha os dados a seguir:
+      Preencha seus dados pessoais:
     </p>
   </header>
 
-  <form >
-    <input id="nome" placeholder="Informe seu nome completo"><br>
-    <input id="nascimento" type="date" placeholder="Informe sua data de nascimento"><br>
+  <form novalidate>
+    <input id="nome" placeholder="Informe seu nome completo"><br><br>
+    <input id="nascimento" type="date" placeholder="Informe sua data de nascimento">
+    <label > Sexo: </label>
     <select id="sexo" required>
       <option value="">Selecione...</option>
       <option value="f">Feminino</option>
       <option value="m">Masculino</option>
-    </select><br>
+    </select><br><br>
+    <div>
+      <div class="checkbox">
+        <input id="termosAceitos" type="checkbox">
+        <label for="termosAceitos">
+          Aceito os termos e condições propostos.
+        </label>
+      </div>
+    </div><br>
+
     <button>Verificar Documentos</button>
   </form>
 
   <div id="resposta"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
-  <script src="register-person.js" type="module"></script>
+  <script src="documentos-exigidos.js" type="module"></script>
 </body>
 </html>
