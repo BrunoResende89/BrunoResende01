@@ -16,18 +16,18 @@
   </header>
 
   <form novalidate>
-    <input id="nome" placeholder="Informe seu nome completo"><br><br>
-    <input id="nascimento" type="date" placeholder="Informe sua data de nascimento">
+    <input id="name" placeholder="Informe seu nome completo"><br><br>
+    <input id="birth" type="date" placeholder="Informe sua data de nascimento">
     <label > Sexo: </label>
-    <select id="sexo" required>
+    <select id="gender" required>
       <option value="">Selecione...</option>
-      <option value="f">Feminino</option>
-      <option value="m">Masculino</option>
+      <option value="f">Female</option>
+      <option value="m">Male</option>
     </select><br><br>
     <div>
       <div class="checkbox">
-        <input id="termosAceitos" type="checkbox">
-        <label for="termosAceitos">
+        <input id="terms&Conditions" type="checkbox">
+        <label for="terms&Conditions">
           Aceito os termos e condições propostos.
         </label>
       </div>
@@ -36,9 +36,9 @@
     <button>Verificar Documentos</button>
   </form>
 
-  <div id="resposta"></div>
+  <div id="answer"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
-  <script src="documentos-exigidos.js" type="module"></script>
+  <script src="register-person.js" type="module"></script>
 </body>
 </html>

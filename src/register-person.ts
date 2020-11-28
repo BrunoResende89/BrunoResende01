@@ -1,14 +1,14 @@
 {
-  const nome = document.querySelector<HTMLInputElement>('#nome')!
-  const nascimento = document.querySelector<HTMLDataListElement>('#nascimento')!
-  const sexo = document.querySelector<HTMLSelectElement>('#sexo')!
-  const formulario = document.querySelector<HTMLFormElement>('form')!
-  const resposta = document.querySelector<HTMLInputElement>('#resposta')!
+  const name = document.querySelector<HTMLInputElement>('#name')!
+  const birth = document.querySelector<HTMLDataListElement>('#birth')!
+  const gender = document.querySelector<HTMLSelectElement>('#gender')!
+  const form = document.querySelector<HTMLFormElement>('form')!
+  const answer = document.querySelector<HTMLInputElement>('#answer')!
 
 
-  nome.focus()
+  name.focus()
 
-  formulario.addEventListener('submit', (e: Event) => {
+  form.addEventListener('submit', (e: Event) => {
     e.preventDefault()
 
     
