@@ -42,7 +42,7 @@ form.addEventListener('submit', (e: Event) => {
         birth.value
       )
 
-      clients.push(client)
+      clients.push()
 
       // Serialização no JS ocorre em forma de JSON
       localStorage.setItem('clients', JSON.stringify(clients))
@@ -53,7 +53,7 @@ form.addEventListener('submit', (e: Event) => {
       resposta.className = 'negative'
     } finally {
       form.style.display = 'flex'
-      loading.style.display = 'none'
+
     }
   }, 3000)
 })
