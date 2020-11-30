@@ -2,10 +2,13 @@ import Gender from './Gender.js'
 import Person from './Person.js'
 
 export class Client extends Person {
+  push(clients: Client) {
+    throw new Error('Method not implemented.')
+  }
   email: number | string
   
 
-  constructor (name: String, birth: Date, gender: Gender, email: number | string) {
+  constructor (name: String, birth: Number, gender: Gender, email: number | string) {
     super(name, birth, gender)
     this.email = email
 

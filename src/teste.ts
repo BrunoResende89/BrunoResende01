@@ -1,7 +1,7 @@
-import Person from 'Person.js'
-import Book from './Book.js'
-import Periodical from './Periodical.js'
-import Gender from './Gender.js'
+import Person from './entities/Person.js'
+import Book from './entities/Book.js'
+import Periodical from './entities/Periodical.js'
+import Gender from './entities/Gender.js'
 
 const Person1 = new Person("Bruno", new Date(1989, 12, 2), Gender.Male)
 const Person2 = new Person("Erika", new Date(1988, 22, 6), Gender.Female)
