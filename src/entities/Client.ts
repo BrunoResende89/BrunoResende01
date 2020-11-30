@@ -26,13 +26,13 @@ export class Client extends Person {
 
     showYourself () {
     if (this.gender === Gender.Male) {
-      return `Sou um aluno, meu nome é ${this.name}.`
+      return `Sou Cliente VIP, meu nome é ${this.name}.`
     } else {
-      return `Sou uma aluna, meu nome é ${this.name}.`
+      return `Sou Cliente VIP, meu nome é ${this.name}.`
     }
   }
 
-    showYourselfWithGreeting (greeting: string) {
+    showYourselfWithGreeting (greeting: Date) {
     return this.showYourself() + ' ' + greeting
   }
 }
