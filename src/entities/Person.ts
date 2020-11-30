@@ -12,31 +12,10 @@ export class Person {
         this.gender = gender
     }
 
-    if (!name: any) {
-      throw new ReferenceError('name')
-    }
-
-    if (!birth: any) {
-      throw new ReferenceError('birth')
-    }
-
-    if (!gender: any) {
-      throw new ReferenceError('gender')
-    }
-
-  public showYourself () {
-    if (this.gender === Gender.Male) {
-      return `Sou um aluno, meu nome é ${this.name}.`
-    } else {
-      return `Sou uma aluna, meu nome é ${this.name}.`
+    IShowYourself () {
+      const article = this.gender === Gender.Male ? 'o' : 'a'
+      return `Olá, eu sou ${article} ${this.name}.`
     }
   }
 
-  public showYourselfWithGreeting (greeting: string) {
-    return this.showYourself() + ' ' + greeting
-  }
-
-    
-}
-
-export default Person
+  export default Person
