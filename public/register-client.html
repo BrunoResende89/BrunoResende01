@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Pessoas</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css" />
+  <link rel="stylesheet" href="base.css">
+</head>
+<body>
+  <header>
+    <h1>Cadastro do Cliente VIP:</h1>
+    <p>
+      Preencha seus dados pessoais:
+    </p>
+  </header>
+
+  <form>
+    <input id="name" placeholder="Informe seu nome completo" ><br><br>
+    <input id="email" type="email" placeholder="Informe seu e-mail preferencial"><br><br>
+    <input id="birth" type="date" placeholder="Informe sua data de nascimento" >
+    <label> Sexo: </label>
+    <select id="gender" >
+      <option value="">Selecione...</option>
+      <option value="f">Female</option>
+      <option value="m">Male</option>
+    </select><br><br>
+
+    <button>Salvar Cadastro</button>
+  </form>
+
+  <div id="resposta"></div>
+
+  <script src="register-client.js" type="module"></script>
+</body>
+</html>
