@@ -1,14 +1,13 @@
 import Gender from './entities/Gender.js'
-import Client from './entities/Client.js'
+import Person from './entities/Person.js'
 
 const name = document.querySelector<HTMLInputElement>('#name')!
-const email = document.querySelector<HTMLInputElement>('#email')!
 const birth = document.querySelector<HTMLInputElement>('#birth')!
 const gender = document.querySelector<HTMLSelectElement>('#gender')!
 const form = document.querySelector('form')!
 const resposta = document.querySelector<HTMLDivElement>('#resposta')!
 
-const clients: Client[] = []
+const persons: Person[] = []
 
 showClients()
 name.focus()
@@ -16,7 +15,7 @@ name.focus()
 form.addEventListener('submit', (e: Event) => {
   e.preventDefault()
 
-    name.className = email.className = birth.className = gender.className = ''
+    name.className = birth.className = gender.className = ''
 
     const valorName = name.value.trim()
 
@@ -35,24 +34,6 @@ form.addEventListener('submit', (e: Event) => {
     resposta.className = 'negative'
     name.className = 'negative'
     name.focus()
-    return
-  }
-
-  if (!email.value) {
-    resposta.innerText = 'O campo E-mail é obrigatório!'
-    resposta.className = 'negative'
-    email.className = 'negative'
-    email.focus()
-    return
-  }
-
-  const regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g
-
-  if (!regexEmail.test(email.value)) {
-    resposta.innerText = 'Formato de E-mail inválido!'
-    resposta.className = 'negative'
-    email.className = 'negative'
-    email.focus()
     return
   }
 
@@ -85,17 +66,16 @@ form.addEventListener('submit', (e: Event) => {
 
   setTimeout(() => {
     try {
-      const clients = new Client(
+      const person = new Person(
         name.value,
         birth.valueAsNumber,
         gender.value === 'f' ? Gender.Female : Gender.Male,
-        email.value
       )
 
-      clients.push(clients)
+      persons.push(person)
 
       // Serialização no JS ocorre em forma de JSON
-      localStorage.setItem('clients', JSON.stringify(clients))
+      localStorage.setItem('clients', JSON.stringify(persons))
       showClients()
     } catch (error: any) {
       console.error(error)
@@ -115,14 +95,13 @@ function showClients() {
   if (localStorage.getItem('clients')) {
     const data = JSON.parse(localStorage.getItem('clients')!)
 
-    clients.splice(0)
+    persons.splice(0)
 
     for (const item of data) {
-      clients.push(new Client(
+      persons.push(new Person(
         item.name,
         item.birth,
         item.gender,
-        item.email
       ))
     }
   }
