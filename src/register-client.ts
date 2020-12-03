@@ -9,7 +9,7 @@ const resposta = document.querySelector<HTMLDivElement>('#resposta')!
 
 const persons: Person[] = []
 
-showClients()
+showPersons()
 name.focus()
 
 form.addEventListener('submit', (e: Event) => {
@@ -75,8 +75,8 @@ form.addEventListener('submit', (e: Event) => {
       persons.push(person)
 
       // Serialização no JS ocorre em forma de JSON
-      localStorage.setItem('clients', JSON.stringify(persons))
-      showClients()
+      localStorage.setItem('persons', JSON.stringify(persons))
+      showPersons()
     } catch (error: any) {
       console.error(error)
       resposta.innerText = 'Atualize sua página e tente novamente.'
@@ -91,9 +91,9 @@ form.addEventListener('submit', (e: Event) => {
   resposta.className = 'positive'
 
   
-function showClients() {
-  if (localStorage.getItem('clients')) {
-    const data = JSON.parse(localStorage.getItem('clients')!)
+function showPersons() {
+  if (localStorage.getItem('persons')) {
+    const data = JSON.parse(localStorage.getItem('persons')!)
 
     persons.splice(0)
 
