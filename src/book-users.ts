@@ -166,7 +166,7 @@ form.addEventListener('submit', (e2: Event) => {
 
         let persons: Array<Person> = JSON.parse(localStorage.getItem('Persons')!)
 
-        let i =0
+        /*let i =0
         for (const person of persons) {
             const option = document.createElement('option')
             option.value = i.toString()
@@ -179,9 +179,4 @@ form.addEventListener('submit', (e2: Event) => {
         let periodic = new Document(titleDocument, subtitleDocument, publicDocument, authorDocument.value)
 
         documentInstance
-}
-
-
-
-
-
+}*/
