@@ -9,16 +9,28 @@ const resposta = document.querySelector<HTMLDivElement>('#resposta')!
 
 const persons: Person[] = []
 
-showClients()
 name.focus()
+
+function isFormValid (...elements: (HTMLInputElement | HTMLSelectElement)[]) {
+  for (const element of elements) {
+    if (element.value) {
+      element.className = ''
+    } else {
+      resposta.innerText = element.getAttribute('data-message')!
+      resposta.className = element.className = 'negative'
+      element.focus()
+      return false
+    }
+  }
+
+  return true
+}
 
 form.addEventListener('submit', (e: Event) => {
   e.preventDefault()
 
-    name.className = birth.className = gender.className = ''
-
-    const valorName = name.value.trim()
-
+  let valorName = name.value.trim()  
+  
     if (!valorName) {
       resposta.innerText = 'O campo Nome é obrigatório!'
       resposta.className = 'negative'
@@ -27,9 +39,10 @@ form.addEventListener('submit', (e: Event) => {
       return
     }
 
-    const regexNome = /\w+\s\w+/g
+    const regexName = /\w+\s\w+/g
+    console.log(name.value)
 
-  if (!regexNome.test(valorName)) {
+  if (!regexName.test(valorName)) {
     resposta.innerText = 'Informe seu nome completo!'
     resposta.className = 'negative'
     name.className = 'negative'
@@ -56,6 +69,8 @@ form.addEventListener('submit', (e: Event) => {
     return
   }
 
+
+
   if (!gender.value) {
     resposta.innerText = 'O campo Sexo é obrigatório!'
     resposta.className = 'negative'
@@ -64,9 +79,10 @@ form.addEventListener('submit', (e: Event) => {
     return
   }
 
-  setTimeout(() => {
-    try {
-      const person = new Person(
+  console.log(gender.value)
+
+  try {
+      let person = new Person(
         name.value,
         birth.valueAsNumber,
         gender.value === 'f' ? Gender.Female : Gender.Male,
@@ -75,34 +91,14 @@ form.addEventListener('submit', (e: Event) => {
       persons.push(person)
 
       // Serialização no JS ocorre em forma de JSON
-      localStorage.setItem('clients', JSON.stringify(persons))
-      showClients()
+      localStorage.setItem('persons', JSON.stringify(persons))
+      
     } catch (error: any) {
       console.error(error)
       resposta.innerText = 'Atualize sua página e tente novamente.'
-      resposta.className = 'negative'
-    } finally {
-      form.style.display = 'flex'
     }
-  }, 3000)
-})
+    
+    resposta.innerText = 'Cadastro Finalizado com sucesso!!'
+      resposta.className = 'positive'
+    })
 
-  resposta.innerText = 'Cadastro Finalizado com sucesso!!'
-  resposta.className = 'positive'
-
-  
-function showClients() {
-  if (localStorage.getItem('clients')) {
-    const data = JSON.parse(localStorage.getItem('clients')!)
-
-    persons.splice(0)
-
-    for (const item of data) {
-      persons.push(new Person(
-        item.name,
-        item.birth,
-        item.gender,
-      ))
-    }
-  }
-}

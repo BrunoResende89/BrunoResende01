@@ -11,7 +11,7 @@ const publicDocument = document.querySelector<HTMLInputElement>('#publicDocument
 const author = document.querySelector<HTMLSelectElement>('#author')!
 const titleBook = document.querySelector<HTMLInputElement>('#titleBook')!
 const subtitleBook = document.querySelector<HTMLInputElement>('#subtitleBook')!
-const publicBook = document.querySelector<HTMLDataElement>('#publicBook')!
+const publicBook = document.querySelector<HTMLInputElement>('#publicBook')!
 const isbnBook = document.querySelector<HTMLInputElement>('#isbnBook')!
 const editionBook = document.querySelector<HTMLInputElement>('#editionBook')!
 const volumeBook = document.querySelector<HTMLInputElement>('#volumeBook')!
@@ -72,7 +72,7 @@ form.addEventListener('submit', (e2: Event) => {
             return
         }
 
-        if (!author.value) {
+        /*if (!author.value) {
             resposta.innerText = 'Informe o nome do Autor'
             resposta.className = 'negative'
             author.focus()
@@ -85,7 +85,7 @@ form.addEventListener('submit', (e2: Event) => {
             resposta.className = 'negative'
             author.focus()
             return
-        }
+        }*/
 
         if (!isbnBook.value) {
             resposta.innerText = 'Numero de registro obrigatório'
@@ -109,7 +109,9 @@ form.addEventListener('submit', (e2: Event) => {
         }
 
         try {
-            let book = new Book(titleBook.value, subtitleBook.value, publicBook.value, isbnBook.value, editionBook.value, volumeBook.value, author.value)
+            const person = persons[parseInt(author.value, 10)]
+
+            let book = new Book(titleBook.valueAsNumber, subtitleBook.valueAsNumber, publicBook.valueAsNumber, isbnBook.value, editionBook.value, volumeBook.valueAsNumber, person)
 
             booksInstance.push(book)
 
@@ -173,20 +175,10 @@ form.addEventListener('submit', (e2: Event) => {
             i++
         }
 
+        try {
+        let periodic = new Document(titleDocument, subtitleDocument, publicDocument, authorDocument.value)
 
-
-
-
-
-
-
-
-
-
-try {
-    let periodic = new Document(titleDocument, subtitleDocument, publicDocument, authorDocument.value)
-
-    documentInstance
+        documentInstance
 }
 
 
