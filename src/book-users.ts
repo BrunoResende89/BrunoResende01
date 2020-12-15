@@ -1,6 +1,8 @@
 import Book from "./entities/Book.js"
 import Document from "./entities/Document.js"
 import Person from "./entities/Person.js"
+import Gender from "./entities/Gender.js"
+import {capitalize, slugify, trimAll} from "./Functions.js"
 
  
 const tipo = document.querySelector<HTMLSelectElement>('#tipo')!
@@ -72,7 +74,7 @@ form.addEventListener('submit', (e2: Event) => {
             return
         }
 
-        /*if (!author.value) {
+        if (!author.value) {
             resposta.innerText = 'Informe o nome do Autor'
             resposta.className = 'negative'
             author.focus()
@@ -85,7 +87,7 @@ form.addEventListener('submit', (e2: Event) => {
             resposta.className = 'negative'
             author.focus()
             return
-        }*/
+        }
 
         if (!isbnBook.value) {
             resposta.innerText = 'Numero de registro obrigatório'
@@ -111,7 +113,7 @@ form.addEventListener('submit', (e2: Event) => {
         try {
             const person = persons[parseInt(author.value, 10)]
 
-            let book = new Book(titleBook.valueAsNumber, subtitleBook.valueAsNumber, publicBook.valueAsNumber, isbnBook.value, editionBook.value, volumeBook.valueAsNumber, person)
+            let book = new Book(slugify(capitalize(trimAll(titleB.value))), slugify(capitalize(trimAll(subTituloB.value))), publicB.valueAsDate!, person, isbn.valueAsNumber, editionB.valueAsNumber, volumB.valueAsNumber)
 
             booksInstance.push(book)
 
@@ -146,12 +148,14 @@ form.addEventListener('submit', (e2: Event) => {
         }
 
         try {
-    
-            const periodic = new Document(titleDocument.value, subtitleDocument.value, publicDocument.value, author.value) 
+            const person = persons[parseInt(author.value, 10)]
+            let periodic = new Document(titleDocument.value, subtitleDocument.value, publicDocument.valueAsNumber, author.value) 
     
             documentsInstance.push(periodic)
 
             localStorage.setItem('Document', JSON.stringify(documentsInstance))
+
+            showDocument()
 
         } catch (error: any) {
             console.error(error)
@@ -166,22 +170,106 @@ form.addEventListener('submit', (e2: Event) => {
 
         let persons: Array<Person> = JSON.parse(localStorage.getItem('Persons')!)
 
-        let i =0
-        for (const person of persons) {
-            const option = document.createElement('option')
-            option.value = i.toString()
-            option.innerText = person.name
-            author.append(option)
-            i++
-        }
+        
+const sortAutores = (a:{name: string, birth: Date, gender: Gender}, b:{name: string, birth: Date, gender: Gender}) => a.name.localeCompare(b.name)
 
-        try {
-        let periodic = new Document(titleDocument, subtitleDocument, publicDocument, authorDocument.value)
+    let newArray1 = persons.sort(sortAutores)
+    let i = 0
 
-        documentInstance
+for (const person of newArray1){
+    const option = document.createElement('option')
+    option.value = i.toString()
+    option.innerText = person.name
+    author.append(option)
+    i++
 }
 
 
+function showBooks() {
+    
+    let table = document.querySelector('table')
+
+    if (!table) {
+        table = document.createElement('table')
+        document.body.append(table)
+    }
+
+    let lines = ''
+    const sortBooks = (a:Book, b:Book) => a.title.localeCompare(b.title)
+
+    let newArray2 = [...booksInstance].sort(sortBooks)
+    console.log(`Array original: ${booksInstance}`)
+    console.log(`Array ordenado R${newArray2}`)
+ 
+    for (const books of newArray2){
+        lines += `
+        <tr>
+            <td>${ books.title }</td>
+            <td>${ books.subtitle }</td>
+            <td>${ books.publishedAt }</td>
+            <td>${ books.author.name }</td>
+            <td>${ books.edition }</td>
+            <td>${ books.volume }</td>
+        </tr>
+        `
+    }
+
+    table.innerHTML = `
+    <thead>
+        <tr>
+            <th>Titulo</th>
+            <th>SubTitulo</th>
+            <th>Ano_publicação</th>
+            <th>Autor</th>
+            <th>Edição</th>
+            <th>Volume</th>
+        </tr>
+    </thead>
+    <tbody>
+        ${lines}
+    </tbody>
+    `
+}
 
 
+function showDocuments() {
+    
+    let table2 = document.querySelector('table')
 
+    if (!table2) {
+        table2 = document.createElement('table')
+        document.body.append(table2)
+    }
+
+    let lines2 = ''
+    const sortDocuments = (a:Document, b:Document) => a.title.localeCompare(b.title)
+
+    let newArray3 = [...documentsInstance].sort(sortDocuments)
+    console.log(`Array original: ${documentsInstance}`)
+    console.log(`Array ordenado R${newArray3}`)
+ 
+    for (const docs of newArray3){
+        lines2 += `
+        <tr>
+            <td>${ docs.title }</td>
+            <td>${ docs.subtitle }</td>
+            <td>${ docs.publishedAt }</td>
+            <td>${ docs.author.name }</td>
+        </tr>
+        `
+    }
+
+    table2.innerHTML = `
+    <thead>
+        <tr>
+            <th>Titulo</th>
+            <th>SubTitulo</th>
+            <th>Ano_publicação</th>
+            <th>Autor</th>
+        </tr>
+    </thead>
+    <tbody>
+        ${lines2}
+    </tbody>
+    `
+}
